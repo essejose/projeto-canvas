@@ -18,18 +18,49 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+     <canvas id="meu_canvas" width="300" height="300"></canvas>
 
        
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
+            // Canvas e contexto
+        canvas = document.getElementById('meu_canvas');
+        context = canvas.getContext('2d');
+        // Dados da bola
+        var x = 30;
+        var y = 30;
+        var raio = 25;
+
+        var anterior = new Date().getTime();
+        // Iniciar a animação
+        requestAnimationFrame(mexerBola);
+
+        // Função de animação
+        function mexerBola() {
+            // Momento atual
+            var agora = new Date().getTime();
+            // Diferença
+            var decorrido = agora - anterior;
+
+            // Limpar o Canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            // Desenhar a bola
+            context.beginPath();
+            context.arc(x, y, raio, 0, Math.PI*2);
+            context.fill();
+
+
+
+            var velocidade = 10;
+            x += velocidade * decorrido / 1000;
+           
+            anterior = agora;
+            requestAnimationFrame(mexerBola);
+
+
+        }
+    </script>
+
     </body>
 </html>
